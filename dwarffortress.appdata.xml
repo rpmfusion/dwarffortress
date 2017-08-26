@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2017 Ben Rosser <rosser.bjr@gmail.com> -->
+<component type="desktop">
+	<id>dwarffortress.desktop</id>
+	<metadata_license>CC0-1.0</metadata_license>
+	<name>Dwarf Fortress</name>
+	<summary>A single-player procedurally generated fantasy game</summary>
+	<description>
+	<p>
+		Dwarf Fortress is a single-player fantasy game. You can control a dwarven
+		outpost or an adventurer in a randomly generated, persistent world.
+	</p>
+	<p>
+		Although Dwarf Fortress is still in a work in progress, many features
+		have already been implemented.
+	</p>
+	<p>
+		Dwarf Fortress is free to redistribute, but is not open source.
+	</p>
+	</description>
+	<screenshots>
+	<screenshot type="default">
+		<image>https://www.acm.jhu.edu/~bjr/fedora/dwarffortress/rpmfusion/dwarffortress_main_menu.png</image>
+	</screenshot>
+	<screenshot>
+		<image>https://www.acm.jhu.edu/~bjr/fedora/dwarffortress/rpmfusion/dwarffortress_ingame.png</image>
+	</screenshot>
+	</screenshots>
+	<url type="homepage">http://www.bay12games.com/dwarves/</url>
+	<update_contact>rosser.bjr_at_gmail.com</update_contact>
+</component>

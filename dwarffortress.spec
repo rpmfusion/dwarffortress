@@ -4,17 +4,17 @@
 %global __strip /bin/true
 
 Name:           dwarffortress
-Version:        0.43.05
-Release:        6%{?dist}
+Version:        0.44.02
+Release:        1%{?dist}
 
 Summary:        A single-player procedurally generated fantasy game
 
 License:        Dwarf Fortress
 URL:            http://www.bay12games.com/dwarves/
-Source0:        http://www.bay12games.com/dwarves/df_43_05_linux.tar.bz2
-Source1:        http://www.bay12games.com/dwarves/df_43_05_linux32.tar.bz2
+Source0:        http://www.bay12games.com/dwarves/df_44_02_linux.tar.bz2
+Source1:        http://www.bay12games.com/dwarves/df_44_02_linux32.tar.bz2
 Source2:        https://github.com/svenstaro/dwarf_fortress_unfuck/archive/%{version}.zip
-Source3:        https://www.acm.jhu.edu/~bjr/fedora/dwarffortress/rpmfusion/dwarffortress-launcher.tar.xz
+Source3:        https://mars.arosser.com/fedora/dwarffortress/rpmfusion/dwarffortress-launcher.tar.xz
 
 # Appstream file.
 Source4:        https://www.acm.jhu.edu/~bjr/fedora/dwarffortress/rpmfusion/dwarffortress.appdata.xml
@@ -129,6 +129,10 @@ appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/appdata/*.appdata
 %{_datadir}/appdata/dwarffortress.appdata.xml
 
 %changelog
+* Wed Nov 29 2017 Ben Rosser <rosser.bjr@gmail.com> 0.44.02-1
+- Updated to latest upstream release.
+- Update URL for dwarffortress launcher.
+
 * Mon Aug 07 2017 Ben Rosser <rosser.bjr@gmail.com> 0.43.05-6
 - Write and include AppData metadata file for Dwarf Fortress.
 - Use macros for cmake and make when compiling.

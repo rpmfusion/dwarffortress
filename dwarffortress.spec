@@ -129,7 +129,7 @@ appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/appdata/*.appdata
 %{_datadir}/appdata/dwarffortress.appdata.xml
 
 %changelog
-* Fri Jan 12 2017 Ben Rosser <rosser.bjr@gmail.com> 0.44.04-1
+* Fri Jan 12 2018 Ben Rosser <rosser.bjr@gmail.com> 0.44.04-1
 - Updated to latest upstream release.
 
 * Tue Dec 26 2017 Ben Rosser <rosser.bjr@gmail.com> 0.44.03-1

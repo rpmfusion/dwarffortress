@@ -4,15 +4,15 @@
 %global __strip /bin/true
 
 Name:           dwarffortress
-Version:        0.44.07
+Version:        0.44.09
 Release:        1%{?dist}
 
 Summary:        A single-player procedurally generated fantasy game
 
 License:        Dwarf Fortress
 URL:            http://www.bay12games.com/dwarves/
-Source0:        http://www.bay12games.com/dwarves/df_44_07_linux.tar.bz2
-Source1:        http://www.bay12games.com/dwarves/df_44_07_linux32.tar.bz2
+Source0:        http://www.bay12games.com/dwarves/df_44_09_linux.tar.bz2
+Source1:        http://www.bay12games.com/dwarves/df_44_09_linux32.tar.bz2
 Source2:        https://github.com/svenstaro/dwarf_fortress_unfuck/archive/%{version}.zip
 Source3:        https://mars.arosser.com/fedora/dwarffortress/rpmfusion/dwarffortress-launcher.tar.xz
 
@@ -129,6 +129,9 @@ appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/appdata/*.appdata
 %{_datadir}/appdata/dwarffortress.appdata.xml
 
 %changelog
+* Mon Apr 09 2018 Ben Rosser <rosser.bjr@gmail.com> - 0.44.09-1
+- Update to latest upstream release.
+
 * Thu Mar 15 2018 Ben Rosser <rosser.bjr@gmail.com> - 0.44.07-1
 - Updated to latest upstream release.
 

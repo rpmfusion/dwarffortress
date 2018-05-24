@@ -1,0 +1,23 @@
+#!/bin/sh
+export SDL_DISABLE_LOCK_KEYS=1 # Work around for bug in Debian/Ubuntu SDL patch.
+#export SDL_VIDEO_CENTERED=1    # Centre the screen.  Messes up resizing.
+
+pkgname=dwarffortress
+prefix=/usr
+
+if [[ ! -d "$HOME/.$pkgname" ]]; then
+    mkdir -p "$HOME/.$pkgname/data"
+    ln -s ${prefix}/share/"$pkgname"/raw "$HOME/.$pkgname/raw"
+    ln -s ${prefix}/libexec/"$pkgname" "$HOME/.$pkgname/libs"
+    cp -rn ${prefix}/share/"$pkgname"/data/init "$HOME/.$pkgname/data/init"
+fi
+
+if [[ ! -f "$HOME/.dwarffortress/.stockpile" ]]; then
+    for link in announcement art dipscript help index initial_movies movies shader.fs shader.vs sound speech; do
+        cp -r ${prefix}/share/"$pkgname"/data/$link "$HOME/.$pkgname/data/$link"
+    done
+fi
+
+cd "$HOME/.$pkgname"
+exec ./libs/Dwarf_Fortress "$@"
+

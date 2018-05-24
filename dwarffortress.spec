@@ -11,13 +11,25 @@ Summary:        A single-player procedurally generated fantasy game
 
 License:        Dwarf Fortress
 URL:            http://www.bay12games.com/dwarves/
+
+# Due to pre-compiled stuff, there is a separate 32 and 64 bit architecture.
 Source0:        http://www.bay12games.com/dwarves/df_44_09_linux.tar.bz2
 Source1:        http://www.bay12games.com/dwarves/df_44_09_linux32.tar.bz2
+
+# The libgraphics sources, as maintained by the Arch Linux packager.
 Source2:        https://github.com/svenstaro/dwarf_fortress_unfuck/archive/%{version}.zip
-Source3:        https://mars.arosser.com/fedora/dwarffortress/rpmfusion/dwarffortress-launcher.tar.xz
+
+# Desktop file.
+Source3:        dwarffortress.desktop
 
 # Appstream file.
-Source4:        https://www.acm.jhu.edu/~bjr/fedora/dwarffortress/rpmfusion/dwarffortress.appdata.xml
+Source4:        dwarffortress.appdata.xml
+
+# Launcher script.
+Source5:        dwarffortress
+
+# Icon.
+Source6:        dwarffortress.png
 
 # Only build for 32 and 64 bit x86 systems.
 # (According to kwizart, just use i686 here).
@@ -79,7 +91,6 @@ tar xfj %SOURCE1
 # Extract other sources.
 cd df_linux/
 unzip -qo %SOURCE2
-tar xfJ %SOURCE3
 
 # Fix some permissions.
 find -type d -exec chmod 755 {} +
@@ -108,10 +119,10 @@ strip %{buildroot}%{_libexecdir}/dwarffortress/libgraphics.so
 
 # Install .desktop file and launcher script from Arch Linux package.
 # Or, rather, the modified versions.
-sed 's|prefix=/usr|prefix=%{_prefix}|' -i dwarffortress-launcher/dwarffortress
-install -p -Dm755 dwarffortress-launcher/dwarffortress %{buildroot}%{_bindir}/dwarffortress
-install -p -Dm644 dwarffortress-launcher/dwarffortress.desktop %{buildroot}%{_datadir}/applications/dwarffortress.desktop
-install -p -Dm644 dwarffortress-launcher/dwarffortress.png %{buildroot}%{_datadir}/pixmaps/dwarffortress.png
+install -p -Dm755 %SOURCE5 %{buildroot}%{_bindir}/dwarffortress
+sed 's|prefix=/usr|prefix=%{_prefix}|' -i %{buildroot}%{_bindir}/dwarffortress
+install -p -Dm644 %SOURCE3 %{buildroot}%{_datadir}/applications/dwarffortress.desktop
+install -p -Dm644 %SOURCE6 %{buildroot}%{_datadir}/pixmaps/dwarffortress.png
 desktop-file-validate %{buildroot}%{_datadir}/applications/dwarffortress.desktop
 
 # Install appdata file and validate it.
@@ -129,6 +140,11 @@ appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/appdata/*.appdata
 %{_datadir}/appdata/dwarffortress.appdata.xml
 
 %changelog
+* Thu May 24 2018 Ben Rosser <rosser.bjr@gmail.com> - 0.44.09-1
+- Updated to latest upstream version, 0.44.10.
+- Add the launcher files separately as individual sources, not a tarball.
+- Fix a bug in the desktop file.
+
 * Mon Apr 09 2018 Ben Rosser <rosser.bjr@gmail.com> - 0.44.09-1
 - Update to latest upstream release.
 

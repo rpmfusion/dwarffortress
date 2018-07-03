@@ -4,7 +4,7 @@
 %global __strip /bin/true
 
 Name:           dwarffortress
-Version:        0.44.10
+Version:        0.44.11
 Release:        1%{?dist}
 
 Summary:        A single-player procedurally generated fantasy game
@@ -13,11 +13,11 @@ License:        Dwarf Fortress
 URL:            http://www.bay12games.com/dwarves/
 
 # Due to pre-compiled stuff, there is a separate 32 and 64 bit architecture.
-Source0:        http://www.bay12games.com/dwarves/df_44_10_linux.tar.bz2
-Source1:        http://www.bay12games.com/dwarves/df_44_10_linux32.tar.bz2
+Source0:        http://www.bay12games.com/dwarves/df_44_11_linux.tar.bz2
+Source1:        http://www.bay12games.com/dwarves/df_44_11_linux32.tar.bz2
 
 # The libgraphics sources, as maintained by the Arch Linux packager.
-Source2:        https://github.com/svenstaro/dwarf_fortress_unfuck/archive/%{version}.zip
+Source2:        https://github.com/svenstaro/dwarf_fortress_unfuck/archive/%{version}.1/dwarffortress-libgraphics-%{version}.zip
 
 # Desktop file.
 Source3:        dwarffortress.desktop
@@ -140,6 +140,9 @@ appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/appdata/*.appdata
 %{_datadir}/appdata/dwarffortress.appdata.xml
 
 %changelog
+* Tue Jul 03 2018 Ben Rosser <rosser.bjr@gmail.com> - 0.44.11-1
+- Updated to latest upstream version, 0.44.11.
+
 * Thu May 24 2018 Ben Rosser <rosser.bjr@gmail.com> - 0.44.10-1
 - Updated to latest upstream version, 0.44.10.
 - Add the launcher files separately as individual sources, not a tarball.

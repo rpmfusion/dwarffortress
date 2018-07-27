@@ -5,7 +5,7 @@
 
 Name:           dwarffortress
 Version:        0.44.11
-Release:        1%{?dist}
+Release:        2%{?dist}
 
 Summary:        A single-player procedurally generated fantasy game
 
@@ -140,6 +140,9 @@ appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/appdata/*.appdata
 %{_datadir}/appdata/dwarffortress.appdata.xml
 
 %changelog
+* Fri Jul 27 2018 RPM Fusion Release Engineering <sergio@serjux.com> - 0.44.11-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
 * Tue Jul 03 2018 Ben Rosser <rosser.bjr@gmail.com> - 0.44.11-1
 - Updated to latest upstream version, 0.44.11.
 

@@ -5,7 +5,7 @@
 
 Name:           dwarffortress
 Version:        0.44.12
-Release:        1%{?dist}
+Release:        2%{?dist}
 
 Summary:        A single-player procedurally generated fantasy game
 
@@ -140,6 +140,9 @@ appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/appdata/*.appdata
 %{_datadir}/appdata/dwarffortress.appdata.xml
 
 %changelog
+* Sun Sep 30 2018 Sérgio Basto <sergio@serjux.com> - 0.44.12-2
+- Rebuild for glew 2.1.0
+
 * Thu Aug 09 2018 Ben Rosser <rosser.bjr@gmail.com> - 0.44.12-1
 - Updated to latest upstream release.
 

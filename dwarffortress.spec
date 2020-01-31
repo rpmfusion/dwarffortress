@@ -4,8 +4,8 @@
 %global __strip /bin/true
 
 Name:           dwarffortress
-Version:        0.44.12
-Release:        4%{?dist}
+Version:        0.47.01
+Release:        1%{?dist}
 
 Summary:        A single-player procedurally generated fantasy game
 
@@ -13,8 +13,8 @@ License:        Dwarf Fortress
 URL:            http://www.bay12games.com/dwarves/
 
 # Due to pre-compiled stuff, there is a separate 32 and 64 bit architecture.
-Source0:        http://www.bay12games.com/dwarves/df_44_12_linux.tar.bz2
-Source1:        http://www.bay12games.com/dwarves/df_44_12_linux32.tar.bz2
+Source0:        http://www.bay12games.com/dwarves/df_47_01_linux.tar.bz2
+Source1:        http://www.bay12games.com/dwarves/df_47_01_linux32.tar.bz2
 
 # The libgraphics sources, as maintained by the Arch Linux packager.
 Source2:        https://github.com/svenstaro/dwarf_fortress_unfuck/archive/%{version}/dwarffortress-libgraphics-%{version}.zip
@@ -140,6 +140,9 @@ appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/appdata/*.appdata
 %{_datadir}/appdata/dwarffortress.appdata.xml
 
 %changelog
+* Fri Jan 31 2020 Chris Collins <collins.christopher@gmail.com> - 0.47.01-1
+- Updated to latest upstream release.
+
 * Sat Aug 10 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.44.12-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 

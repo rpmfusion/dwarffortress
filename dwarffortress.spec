@@ -4,7 +4,7 @@
 %global __strip /bin/true
 
 Name:           dwarffortress
-Version:        0.47.03
+Version:        0.47.04
 Release:        1%{?dist}
 
 Summary:        A single-player procedurally generated fantasy game
@@ -13,8 +13,8 @@ License:        Dwarf Fortress
 URL:            http://www.bay12games.com/dwarves/
 
 # Due to pre-compiled stuff, there is a separate 32 and 64 bit architecture.
-Source0:        http://www.bay12games.com/dwarves/df_47_03_linux.tar.bz2
-Source1:        http://www.bay12games.com/dwarves/df_47_03_linux32.tar.bz2
+Source0:        http://www.bay12games.com/dwarves/df_47_04_linux.tar.bz2
+Source1:        http://www.bay12games.com/dwarves/df_47_04_linux32.tar.bz2
 
 # The libgraphics sources, as maintained by the Arch Linux packager.
 Source2:        https://github.com/svenstaro/dwarf_fortress_unfuck/archive/%{version}/dwarffortress-libgraphics-%{version}.zip
@@ -140,6 +140,9 @@ appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/appdata/*.appdata
 %{_datadir}/appdata/dwarffortress.appdata.xml
 
 %changelog
+* Thu Mar 12 2020 John Allen <jba@kick.computer> - 0.47.04-1
+- Update to latest upstream release.
+
 * Mon Feb 24 2020 Ben Rosser <rosser.bjr@gmail.com> - 0.47.03-1
 - Update to latest upstream release.
 

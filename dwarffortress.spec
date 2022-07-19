@@ -4,8 +4,8 @@
 %global __strip /bin/true
 
 Name:           dwarffortress
-Version:        0.47.04
-Release:        6%{?dist}
+Version:        0.47.05
+Release:        1%{?dist}
 
 Summary:        A single-player procedurally generated fantasy game
 
@@ -13,27 +13,29 @@ License:        Dwarf Fortress
 URL:            http://www.bay12games.com/dwarves/
 
 # Due to pre-compiled stuff, there is a separate 32 and 64 bit architecture.
-Source0:        http://www.bay12games.com/dwarves/df_47_04_linux.tar.bz2
-Source1:        http://www.bay12games.com/dwarves/df_47_04_linux32.tar.bz2
+Source0:        http://www.bay12games.com/dwarves/df_47_05_linux.tar.bz2
 
 # The libgraphics sources, as maintained by the Arch Linux packager.
-Source2:        https://github.com/svenstaro/dwarf_fortress_unfuck/archive/%{version}/dwarffortress-libgraphics-%{version}.zip
+Source1:        https://github.com/svenstaro/dwarf_fortress_unfuck/archive/%{version}/dwarffortress-libgraphics-%{version}.zip
 
 # Desktop file.
-Source3:        dwarffortress.desktop
+Source2:        dwarffortress.desktop
 
 # Appstream file.
-Source4:        dwarffortress.appdata.xml
+Source3:        dwarffortress.appdata.xml
 
 # Launcher script.
-Source5:        dwarffortress
+Source4:        dwarffortress
 
 # Icon.
-Source6:        dwarffortress.png
+Source5:        dwarffortress.png
+
+# https://github.com/svenstaro/dwarf_fortress_unfuck/commit/6dcfe5ae869fddd51940c6c37a95f7bc639f4389
+Patch0:         6dcfe5ae869fddd51940c6c37a95f7bc639f4389.patch
 
 # Only build for 32 and 64 bit x86 systems.
 # (According to kwizart, just use i686 here).
-ExclusiveArch:  x86_64 i686
+ExclusiveArch:  x86_64
 
 # BuildRequires from https://github.com/svenstaro/dwarf_fortress_unfuck/
 BuildRequires:  automake
@@ -80,31 +82,26 @@ have already been implemented.
 Dwarf Fortress is free to redistribute, but is not open source.
 
 %prep
-# Extract the 'sources' into the build directory.
-# This is architecture-dependent, because upstream distributes two tarballs.
-%ifarch x86_64
 tar xfj %SOURCE0
-%else
-tar xfj %SOURCE1
-%endif
 
 # Extract other sources.
 cd df_linux/
-unzip -qo %SOURCE2
+unzip -qo %SOURCE1
 
 # Fix some permissions.
 find -type d -exec chmod 755 {} +
 find -type f -exec chmod 644 {} +
 dos2unix *.txt
 
-%build
-cd df_linux/
 cd dwarf_fortress_unfuck*
-mkdir -p build && cd build
+%patch0 -p1
+
+%build
+cd df_linux/dwarf_fortress_unfuck*
 
 # Something in the default make flags prevents dfhack from linking to DF.
-cmake ..
-%make_build
+%cmake -DOpenGL_GL_PREFERENCE=GLVND
+%cmake_build
 
 %install
 cd df_linux/
@@ -114,32 +111,38 @@ cp -ra data raw sdl %{buildroot}%{_datadir}/dwarffortress/
 
 # Copy over the actual binary and compiled graphics library.
 install -p -Dm755 libs/Dwarf_Fortress %{buildroot}%{_libexecdir}/dwarffortress/Dwarf_Fortress
-install -p -Dm755 dwarf_fortress_unfuck*/build/libgraphics.so %{buildroot}%{_libexecdir}/dwarffortress/libgraphics.so
+install -p -Dm755 dwarf_fortress_unfuck*/%{_vpath_builddir}/libgraphics.so %{buildroot}%{_libexecdir}/dwarffortress/libgraphics.so
 strip %{buildroot}%{_libexecdir}/dwarffortress/libgraphics.so
 
 # Install .desktop file and launcher script from Arch Linux package.
 # Or, rather, the modified versions.
-install -p -Dm755 %SOURCE5 %{buildroot}%{_bindir}/dwarffortress
+install -p -Dm755 %SOURCE4 %{buildroot}%{_bindir}/dwarffortress
 sed 's|prefix=/usr|prefix=%{_prefix}|' -i %{buildroot}%{_bindir}/dwarffortress
-install -p -Dm644 %SOURCE3 %{buildroot}%{_datadir}/applications/dwarffortress.desktop
-install -p -Dm644 %SOURCE6 %{buildroot}%{_datadir}/pixmaps/dwarffortress.png
+install -p -Dm644 %SOURCE2 %{buildroot}%{_datadir}/applications/dwarffortress.desktop
+install -p -Dm644 %SOURCE5 %{buildroot}%{_datadir}/pixmaps/dwarffortress.png
 desktop-file-validate %{buildroot}%{_datadir}/applications/dwarffortress.desktop
 
 # Install appdata file and validate it.
-mkdir -p %{buildroot}%{_datadir}/appdata
-cp -a %SOURCE4 %{buildroot}%{_datadir}/appdata/
-appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/appdata/*.appdata.xml
+mkdir -p %{buildroot}%{_metainfodir}/
+cp -a %SOURCE3 %{buildroot}%{_metainfodir}/
+appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/*.appdata.xml
 
 %files
 %doc df_linux/*.txt df_linux/README.linux
-%{_datadir}/dwarffortress
-%{_libexecdir}/dwarffortress
+%{_datadir}/dwarffortress/
+%{_libexecdir}/dwarffortress/
 %{_bindir}/dwarffortress
 %{_datadir}/applications/dwarffortress.desktop
 %{_datadir}/pixmaps/dwarffortress.png
-%{_datadir}/appdata/dwarffortress.appdata.xml
+%{_metainfodir}/dwarffortress.appdata.xml
 
 %changelog
+* Tue Jul 19 2022 Leigh Scott <leigh123linux@gmail.com> - 0.47.05-1
+- Updated to latest upstream release, 0.47.05.
+- Apply upstream fix for rfbz#6368
+- Use cmake macros
+- Remove i686 support
+
 * Mon Feb 28 2022 Sérgio Basto <sergio@serjux.com> - 0.47.04-6
 - Rebuid for glew-2.2.0
 

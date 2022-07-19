@@ -47,10 +47,9 @@ BuildRequires:  atk-devel
 BuildRequires:  cairo-devel
 BuildRequires:  fontconfig-devel
 BuildRequires:  freetype-devel
-BuildRequires:  gdk-pixbuf2-devel
 BuildRequires:  glew-devel
 BuildRequires:  glib2-devel
-BuildRequires:  gtk2-devel
+BuildRequires:  gtk3-devel
 BuildRequires:  libICE-devel
 BuildRequires:  libGL-devel
 BuildRequires:  libGLU-devel

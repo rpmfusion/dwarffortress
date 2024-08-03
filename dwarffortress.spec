@@ -93,7 +93,7 @@ find -type f -exec chmod 644 {} +
 dos2unix *.txt
 
 cd dwarf_fortress_unfuck*
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 cd df_linux/dwarf_fortress_unfuck*

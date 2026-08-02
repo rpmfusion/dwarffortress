@@ -99,7 +99,7 @@ cd dwarf_fortress_unfuck*
 cd df_linux/dwarf_fortress_unfuck*
 
 # Something in the default make flags prevents dfhack from linking to DF.
-%cmake -DOpenGL_GL_PREFERENCE=GLVND
+%cmake -DOpenGL_GL_PREFERENCE=GLVND -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 %cmake_build
 
 %install
